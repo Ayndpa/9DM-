@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         自动计算并提交算术题
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  自动计算并提交9dmgamemod.com及其子域名上的算术题
 // @author       你的名字
 // @match        *://*.9dmgamemod.com/*
