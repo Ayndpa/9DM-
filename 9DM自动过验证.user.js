@@ -16,27 +16,20 @@
     if (mathProblem) {
         const problemText = mathProblem.innerText.trim();
         // 使用正则表达式提取算术题中的数字和运算符
-        const matches = problemText.match(/(\d+)\s*([\+\-])\s*(\d+)\s*([\+\-])\s*(\d+)/);
+        const matches = problemText.matchAll(/(\d+)\s*([\+\-])?/g);
         if (matches) {
-            const num1 = parseInt(matches[1], 10);
-            const operator1 = matches[2];
-            const num2 = parseInt(matches[3], 10);
-            const operator2 = matches[4];
-            const num3 = parseInt(matches[5], 10);
+            let result = 0;
+            let operator = '+'; // 默认第一个数字是正数
 
-            // 计算答案
-            let result;
-            if (operator1 === '+' && operator2 === '+') {
-                result = num1 + num2 + num3;
-            } else if (operator1 === '+' && operator2 === '-') {
-                result = num1 + num2 - num3;
-            } else if (operator1 === '-' && operator2 === '+') {
-                result = num1 - num2 + num3;
-            } else if (operator1 === '-' && operator2 === '-') {
-                result = num1 - num2 - num3;
-            } else {
-                console.log('无法识别的运算符');
-                return;
+            for (const match of matches) {
+                const num = parseInt(match[1], 10);
+                if (operator === '+') {
+                    result += num;
+                } else if (operator === '-') {
+                    result -= num;
+                }
+                // 更新下一个运算符
+                operator = match[2] || '+'; // 如果没有下一个运算符，默认为加法
             }
 
             // 查找输入框并填写答案
